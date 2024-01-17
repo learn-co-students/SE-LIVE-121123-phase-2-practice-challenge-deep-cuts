@@ -12,12 +12,17 @@ function TracksPage() {
       .then(r => r.json())
       .then(setTracks)
   }, [])
+
+  const addTrack = (newTrack) => {
+    console.log("🚀 ~ addTrack ~ newTrack:", newTrack)
+    setTracks([newTrack, ...tracks])
+  }
   
     
   return (
     <div>
       <Search />
-      <AddTrackForm />
+      <AddTrackForm onSubmitForm={addTrack}/>
       <TracksList tracks={tracks} />
     </div>
   )
