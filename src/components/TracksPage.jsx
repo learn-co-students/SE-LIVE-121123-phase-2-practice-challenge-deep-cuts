@@ -3,7 +3,6 @@ import Search from './Search'
 import AddTrackForm from './AddTrackForm'
 import TracksList from './TracksList'
 import Sort from './Sort'
-import { unstable_renderSubtreeIntoContainer } from 'react-dom'
 
 function TracksPage() {
 
@@ -11,8 +10,10 @@ function TracksPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [sortBy, setSortBy] = useState("artist")
 
+  const url = "http://localhost:8001/tracks"
+
   useEffect(() => {
-    fetch("http://localhost:8001/tracks")
+    fetch(url)
       .then(r => r.json())
       .then(setTracks)
   }, [])
@@ -22,9 +23,14 @@ function TracksPage() {
     setTracks([newTrack, ...tracks])
   }
 
+  const deleteTrack = id => {
+    fetch(`${url}/${id}`, { method: 'DELETE' })
+  }
+
   const removeTrack = (trackId) => {
     console.log("🚀 ~ TracksPage ~ trackId:", trackId)
-
+    deleteTrack(trackId)
+    setTracks(tracks.filter(track => track.id !== trackId))
   }
 
   const filteredTracks = tracks.filter(track => {
