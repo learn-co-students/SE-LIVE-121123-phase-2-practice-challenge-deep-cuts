@@ -1,17 +1,21 @@
-import React from 'react'
-import Track from './Track'
+import React from "react";
+import Track from "./Track";
 
 function TracksList({ tracks, onDelete }) {
-
-  const trackComps = tracks.map(track => <Track key={track.id} {...track} onDelete={onDelete}/>)
+  const trackComps = tracks.map((track) => (
+    <Track
+      key={track.id}
+      {...track}
+      onDelete={onDelete}
+    />
+  ));
 
   return (
     <table>
       <tbody>
         <tr>
           <th>
-          <h3 className="row-image">Img</h3>
-
+            <h3 className="row-image">Img</h3>
           </th>
           <th>
             <h3 className="row-title">Title</h3>
@@ -26,7 +30,7 @@ function TracksList({ tracks, onDelete }) {
         {trackComps}
       </tbody>
     </table>
-  )
+  );
 }
 
-export default TracksList
+export default TracksList;
