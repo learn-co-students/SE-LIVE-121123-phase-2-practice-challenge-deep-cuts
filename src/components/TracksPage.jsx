@@ -22,6 +22,11 @@ function TracksPage() {
     setTracks([newTrack, ...tracks])
   }
 
+  const removeTrack = (trackId) => {
+    console.log("🚀 ~ TracksPage ~ trackId:", trackId)
+
+  }
+
   const filteredTracks = tracks.filter(track => {
     return track.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             track.artist.toLowerCase().includes(searchTerm.toLowerCase())
@@ -40,7 +45,7 @@ function TracksPage() {
       <Sort sortBy={sortBy} onChangeSort={setSortBy} />
       <Search searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <AddTrackForm onSubmitForm={addTrack}/>
-      <TracksList tracks={filteredTracks} />
+      <TracksList tracks={filteredTracks} onDelete={removeTrack}/>
     </div>
   )
 }
